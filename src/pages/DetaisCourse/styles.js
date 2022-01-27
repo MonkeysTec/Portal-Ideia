@@ -17,10 +17,7 @@ export const TitleCourse = styled.Text`
   font-family:'Montserrat_600SemiBold';
 
 `;
-export const HoursCourse = styled.Text`
-  margin-left: 10px;
-  font-family:Montserrat_500Medium;
-`;
+
 export const Description = styled.Text`
   width: 90%;
   font-family:Montserrat_500Medium;
@@ -69,10 +66,4 @@ export const IconVideoView = styled.View`
   border-radius: 8px;
   margin-top:10px;
 `;
-export const TextVideo = styled.Text`
-  color: ${colors.fontColor};
-  font-weight: 700;
-  margin-left: 5px;
-  font-family:Montserrat_500Medium;
 
-`;

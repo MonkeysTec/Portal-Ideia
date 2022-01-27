@@ -7,6 +7,7 @@ import Login from './src/pages/Login';
 import NewAccount from './src/pages/NewAccount';
 import DetaisCourse from './src/pages/DetaisCourse';
 import { useFonts, Montserrat_600SemiBold,Montserrat_500Medium,Montserrat_800ExtraBold} from '@expo-google-fonts/montserrat';
+import Home from './src/pages/Home';
 
 
 
@@ -22,7 +23,7 @@ export default function App() {
     return null;
   }
   return (
-   <NewAccount/>
+   <Home/>
   );
 }
 

@@ -18,6 +18,7 @@ export const Input = styled.TextInput`
 `;
 export const Label = styled.Text`
  color: ${colors.titleColor} ;
+ font-family:  Montserrat_600SemiBold;
 
 
 `;

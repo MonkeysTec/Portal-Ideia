@@ -2,23 +2,20 @@ import React from 'react';
 import { StyleSheet,Platform,ScrollView,View} from 'react-native';
 import Button from '../../components/Button';
 import Tumb from '../../assets/testeTumb.jpeg'
-
+import CourseVideo from '../../components/CourseVideo'
 import {
   Container,
   Thumbnail,
   TitleCourse,
-  HoursCourse,
   Description,
   Content,
   Certificate,
   Divider,
   TitlesTopics,
-  Icon,
-  IconVideoView,
-  TextVideo
 } from './styles';
 import clock from '../../assets/clock.png'
 import video from '../../assets/video.png'
+import Hours from '../../components/Hours';
 
 
 
@@ -32,24 +29,14 @@ const DetaisCourse = () => {
 
         <View style={{width:'100%',marginLeft:'10%'}}>
           <TitleCourse>
-        Administração Financeira
+            Administração Financeira
           </TitleCourse>
 
-          <View style={{flexDirection:'row'}}>
-            <Icon source={clock}/>
-
-            <HoursCourse>
-              de 08 à 280 horas
-            </HoursCourse>
-          </View>
+          <Hours />
+          <CourseVideo/>
 
 
-        <IconVideoView>
-          <Icon source={video}/>
-          <TextVideo>
-            Curso com Vídeo
-          </TextVideo>
-        </IconVideoView>
+
         <View style={{width:'90%'}}>
           <Button type="primary" fullsize={true}>
               Estudar Agora
