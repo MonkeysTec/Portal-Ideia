@@ -8,6 +8,12 @@ import NewAccount from './src/pages/NewAccount';
 import DetaisCourse from './src/pages/DetaisCourse';
 import { useFonts, Montserrat_600SemiBold,Montserrat_500Medium,Montserrat_800ExtraBold} from '@expo-google-fonts/montserrat';
 import Home from './src/pages/Home';
+import Aprovade from './src/pages/Aprovade';
+import NotAprovade from './src/pages/NotAprovade';
+import StudyArea from './src/pages/StudyArea';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Routes from './routes';
 
 
 
@@ -23,7 +29,7 @@ export default function App() {
     return null;
   }
   return (
-   <Home/>
+    <Routes/>
   );
 }
 
