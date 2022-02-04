@@ -7,10 +7,13 @@ import CourseVideo from '../../components/CourseVideo';
 
 import { Container,Thumbnail,Title,ViewDescription } from './styles';
  import test from '../../assets/teste.webp'
+ import { useNavigation } from '@react-navigation/native';
 
-const Cards = ({title,hours,img}) => {
 
-  console.log(img)
+const Cards = ({ title, hours, img, chidren,item }) => {
+    const navigation = useNavigation();
+
+
   return (
     <Container>
       <Thumbnail source={{
@@ -33,12 +36,12 @@ const Cards = ({title,hours,img}) => {
 
 
       <View style={{width:'90%'}}>
-        <Button fullsize type="primary" >
+        <Button fullsize type="primary" route={'DetaisCourse'} params={item} >
           Acessar curso
         </Button>
       </View>
 
-
+{chidren}
     </Container>
   ) ;
 }
