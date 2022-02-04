@@ -4,7 +4,7 @@ import { View,Image } from 'react-native';
 import Home from '../pages/Home';
 import DetaisCourse from '../pages/DetaisCourse';
 
-
+import StudyArea from '../pages/StudyArea'
 
 
 
@@ -27,6 +27,8 @@ const AppRoutes = ()=>{
       }}>
         <App.Screen name="Home" component={Home} />
             <App.Screen name="DetaisCourse" component={DetaisCourse}/>
+            <App.Screen name="Area Estudante" component={StudyArea}/>
+
 
 
 

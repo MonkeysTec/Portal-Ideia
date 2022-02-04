@@ -3,6 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 
 import Login from '../pages/Login';
+import NewAccount from '../pages/NewAccount';
+
 const Auth = createStackNavigator();
 
 const AuthRoutes = ()=>{
@@ -15,6 +17,8 @@ const AuthRoutes = ()=>{
       },
       }}>
             <Auth.Screen name="Login" component={Login} />
+            <Auth.Screen name="Cadastro" component={NewAccount} />
+
 
 
         </Auth.Navigator>

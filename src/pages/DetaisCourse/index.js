@@ -62,7 +62,7 @@ const DetaisCourse = ({navigation,route}) => {
 
 
         <View style={{width:'90%'}}>
-          <Button type="primary" fullsize={true}>
+          <Button type="primary" fullsize={true} route={'Area Estudante'} params={item}>
               Estudar Agora
           </Button>
         </View>

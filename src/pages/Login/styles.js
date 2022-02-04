@@ -18,7 +18,7 @@ export const Title = styled.Text`
   font-weight: 800;
   font-size: 25px;
 `;
-export const PasswordRemeber = styled.Text`
+export const PasswordRemeber = styled.TouchableOpacity`
 margin-top: 20px;
   color: ${colors.secundaryTitle};
   font-weight: 800;
@@ -30,3 +30,7 @@ export const NewAccount = styled.Text`
   font-weight: 800;
   margin-top: 10px;
   `;
+export const ErrorMessage = styled.Text`
+  color: red;
+  font-size:15px
+`;

@@ -11,6 +11,7 @@ export const Thumbnail = styled.Image`
   width: 90%;
   border-radius: 8px;
   height: 60%;
+  margin-top:20px
   `;
 export const TitleCourse = styled.Text`
   font-size:25px ;

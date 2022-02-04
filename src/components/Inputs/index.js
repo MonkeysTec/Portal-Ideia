@@ -17,7 +17,7 @@ const Inputs = ({placeholder,secureTextEntry,label,...rest}) => {
 
       </InputView>
       <ViewNewInput>
-        <Input placeholder={placeholder} secureTextEntry={true}/>
+        <Input  {...rest} placeholder={placeholder} secureTextEntry={secureTextEntry}/>
 
       </ViewNewInput>
 

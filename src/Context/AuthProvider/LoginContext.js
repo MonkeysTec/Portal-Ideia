@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     //SALVA OS DADOS DO USUARIO NO LOCAL STORAGE
 
     async function signIn(data) {
-
+console.log('dataaa',data)
 
      await AsyncStorage.setItem('@Juntou:user',JSON.stringify(data));
 
