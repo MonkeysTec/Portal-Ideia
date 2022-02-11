@@ -1,11 +1,13 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
 import Login from '../pages/Login';
 import NewAccount from '../pages/NewAccount';
 
-const Auth = createStackNavigator();
+const Auth = createMaterialBottomTabNavigator();
+
 
 const AuthRoutes = ()=>{
     return(

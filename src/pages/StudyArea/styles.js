@@ -51,6 +51,7 @@ export const Divider = styled.Text`
 export const TitlesTopics = styled.Text`
   font-size: 20px;
   font-family:Montserrat_500Medium;
+  margin-bottom:20px;
 
 `
 export const Icon = styled.Image`

@@ -1,43 +1,46 @@
 import React from 'react';
+
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
-import { View,Image } from 'react-native';
-import Home from '../pages/Home';
-import DetaisCourse from '../pages/DetaisCourse';
-
-import StudyArea from '../pages/StudyArea'
-
-
+import Home from '../pages/Home'
+import DetaisCourse from '../pages/DetaisCourse'
+import Aprovade from '../pages/Aprovade'
+import SlideDois from '../pages/SlideDois'
+import Welcome from '../pages/Welcome'
 
 
 
+import colors from '../utils/colors';
+
+const TabBottom = createBottomTabNavigator();
+const TabStack = createStackNavigator();
+
+const TabNavigator = () => (
+  <TabBottom.Navigator  screenOptions={{
+    headerShown: false
+  }}>
+    <TabBottom.Screen name="Home" component={Home} />
+    <TabBottom.Screen name="Cursos Matriculados" component={Aprovade} />
+    <TabBottom.Screen name="Cursos Concluidos" component={SlideDois} />
+    <TabBottom.Screen name="Certificados" component={Home} />
 
 
-const App = createStackNavigator();
+  </TabBottom.Navigator>
+);
 
-const AppRoutes = ()=>{
+const Tab = () => {
+  return (
+    <TabStack.Navigator  screenOptions={{
+            title:'',
+            headerStyle:{
+                backgroundColor:colors.fontColor
+            }
+        }}>
+      <TabStack.Screen name="TabStack" options={{ title: '' }} component={TabNavigator} />
+      <TabStack.Screen name="DetaisCourse" options={{title:''}} component={DetaisCourse} />
 
+    </TabStack.Navigator>
+  );
+};
 
-    return (
-      <App.Navigator screenOptions={{
-        headerStyle: { height: 100, backgroundColor: '#5D34A0', },
-        headerTitleStyle: {
-        fontWeight: "bold",
-        color: "#FFF",
-      },
-      }}>
-        <App.Screen name="Home" component={Home} />
-            <App.Screen name="DetaisCourse" component={DetaisCourse}/>
-            <App.Screen name="Area Estudante" component={StudyArea}/>
-
-
-
-
-            </App.Navigator>
-
-
-
-
-    );
-}
-
-export default AppRoutes;
+export default Tab;

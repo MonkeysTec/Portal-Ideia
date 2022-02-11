@@ -22,7 +22,8 @@ import teste from '../../assets/teste.webp'
 
 
 
-const DetaisCourse = ({navigation,route}) => {
+const DetaisCourse = ({  route }) => {
+  const navigation = useNavigation()
   const { item, img } = route.params;
   //console.log(item.nomeCurso)
   const [image, setImage] = useState()
@@ -62,7 +63,7 @@ const DetaisCourse = ({navigation,route}) => {
 
 
         <View style={{width:'90%'}}>
-          <Button type="primary" fullsize={true} route={'Area Estudante'} params={item}>
+          <Button type="primary" fullsize={true} onPress={()=> navigation.navigate('AreaEstudante',{item})}>
               Estudar Agora
           </Button>
         </View>

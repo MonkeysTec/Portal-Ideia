@@ -36,7 +36,7 @@ const Cards = ({ title, hours, img, chidren,item }) => {
 
 
       <View style={{width:'90%'}}>
-        <Button fullsize type="primary" route={'DetaisCourse'} params={item} >
+        <Button fullsize type="primary" onPress={()=>navigation.navigate('DetaisCourse',{item})} params={item} >
           Acessar curso
         </Button>
       </View>
