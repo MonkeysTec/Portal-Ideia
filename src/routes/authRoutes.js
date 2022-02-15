@@ -6,7 +6,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Login from '../pages/Login';
 import NewAccount from '../pages/NewAccount';
 
-const Auth = createMaterialBottomTabNavigator();
+const Auth = createStackNavigator();
 
 
 const AuthRoutes = ()=>{

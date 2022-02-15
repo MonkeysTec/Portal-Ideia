@@ -17,6 +17,7 @@ export const Title = styled.Text`
   color:${colors.titleColor};
   font-weight: 800;
   font-size: 25px;
+  padding-bottom:30px
 `;
 export const PasswordRemeber = styled.TouchableOpacity`
 margin-top: 20px;

@@ -1,65 +1,72 @@
-import React, { useContext, useState }from 'react';
-import { View ,KeyboardAvoidingView,Text,ActivityIndicator} from 'react-native';
-import { useEffect } from 'react/cjs/react.development';
-import Button from '../../components/Button';
-import Inputs from '../../components/Inputs';
-import axios from 'axios';
-import { Container,Title,PasswordRemeber,NewAccount,ScrollContainer,ErrorMessage } from './styles';
+import React, { useContext } from "react";
+import { Text, View, TextInput, Alert,KeyboardAvoidingView,Platform } from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import Button from "../../components/Button";
+import Inputs from '../../components/Inputs'
+import { Container,Title } from './styles'
 import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
-import { useNavigation } from '@react-navigation/native';
-import colors from '../../utils/colors';
-
-const Login = () => {
-const { signed, user,signOut, signIn, loading } = useContext(AuthContext);
-  const [error, setError] = useState('');
-  const [email, setEmail] = useState('alysson_silva@outlook.com');
-  const [senha, setSenha] = useState('timonkeys');
-  const [loadingLogin,setLoadingLogin] = useState(false)
-
-  const { navigate} = useNavigation()
-
-  async function Login() {
-    setLoadingLogin(true)
-     const { data } = await axios.post('https://portalidea.com.br/api/loginJson.php', {
-      email_area_aluno:'alysson_silva@outlook.com',
-      senha_area_aluno:'timonkeys',
-    })
-
-    if (data.erro === false) {
-      signIn(data.usuario)
-    }else{
-      setError('Email ou senha invalidos');
-      setTimeout(()=>setError(''),3000)
+import AppIntroSlider from "react-native-app-intro-slider";
+import axios from "axios";
+export default function App() {
+  const { signed, user,signIn } = useContext(AuthContext);
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      email: 'alysson_silva@outlook.com',
+      senha: 'timonkeys'
     }
+  });
+  const onSubmit = data => onSsubmit(data);
 
-    setLoadingLogin(true)
-  }
-
-
+  async function onSsubmit(dados) {
+     const { data } = await axios.post('https://portalidea.com.br/api/loginJson.php', {
+      email_area_aluno:dados.email,
+      senha_area_aluno:dados.senha
+     })
+    signIn(data)
+   }
   return (
-     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex:1}}>
-      <Container>
-        <Title>Entrar e estudar </Title>
-        <ErrorMessage>{error }</ErrorMessage>
-      <Inputs placeholder="rodrigo@gmail.com"  value={email}
-              onChangeText={email} />
-      <Inputs placeholder="*******" secureTextEntry={true} onChangeText={setSenha} value={senha} />
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
+    <Container>
+      <Title>Entrar e estudar</Title>
+      <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="E-mail"
 
-        <Button onPress={() => Login()}>
-          {loadingLogin?(<ActivityIndicator/>):'entrar'}
+          />
+        )}
+        name="email"
+      />
+      {errors.email && <Text>This is required.</Text>}
 
+      <Controller
+        control={control}
+        rules={{
+         maxLength: 100,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="senha"
+            secureTextEntry='true'
+          />
+        )}
+        name="senha"
+      />
+
+      <Button type="primary" onPress={handleSubmit(onSubmit)}>
+          Login
       </Button>
-      <PasswordRemeber onClick={()=>navigate('Cadastro')}>
-       <Text style={{marginTop: 20,color: colors.secundaryTitle,fontWeight:'800'}}> Esqueci minha senha</Text>
-      </PasswordRemeber>
-      <NewAccount>
-        Ainda não tenho uma conta
-      </NewAccount>
-      </Container>
-      </KeyboardAvoidingView>
-
+    </Container>
+    </KeyboardAvoidingView>
   );
 }
-
-export default Login;
