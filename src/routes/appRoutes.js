@@ -20,6 +20,7 @@ import iconCertificados from '../assets/iconsMenu/meus-certificados.png'
 
 
 import colors from '../utils/colors';
+import Payment from '../pages/Payment';
 
 const TabBottom = createBottomTabNavigator();
 const TabStack = createStackNavigator();
@@ -67,7 +68,7 @@ const TabNavigator = () => (
     <TabBottom.Screen name="Cursos Concluidos" component={SlideDois} />
     <TabBottom.Screen name="Certificados" component={Home} />
 
-    <TabBottom.Screen name="Configuracoes" component={Home} />
+    <TabBottom.Screen name="Configuracoes" component={Payment} />
 
 
 

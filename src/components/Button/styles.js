@@ -11,7 +11,7 @@ export const Container = styled.TouchableOpacity`
   background-color: ${colors.buttonBgColor};
   margin-top: 25px;
 
-  width: ${(props)=>props.fullsize?'100%':'200px'};
+  width: ${(props)=>props.fullsize?'90%':'200px'};
 
   ${(props) => props.type === 'primary' && css`
     background-color:#5D34A0;
