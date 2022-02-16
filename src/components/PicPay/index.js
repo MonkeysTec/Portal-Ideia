@@ -7,27 +7,27 @@ import { Container,Title } from './styles'
 import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
 import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
-export default function App() {
+
+
+export default function PicPay() {
   const { signed, user,signIn } = useContext(AuthContext);
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      email: 'alysson_silva@outlook.com',
-      senha: 'timonkeys'
+      nome: '',
+      sobreNome: '',
+      email: '',
+      cpf: '',
+
+
     }
   });
-  const onSubmit = data => onSsubmit(data);
+  const onSubmit = data => console.log(data);
 
-  async function onSsubmit(dados) {
-     const { data } = await axios.post('https://portalidea.com.br/api/loginJson.php', {
-      email_area_aluno:dados.email,
-      senha_area_aluno:dados.senha
-     })
-    signIn(data)
-   }
+
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
     <Container>
-      <Title>Entrar e estudar</Title>
+      <Title>PicPay</Title>
       <Controller
         control={control}
         rules={{
@@ -38,14 +38,29 @@ export default function App() {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            label="E-mail"
+            label="Nome"
 
           />
         )}
-        name="email"
+        name="nome"
       />
-      {errors.email && <Text>This is required.</Text>}
+      {errors.nome && <Text>This is required.</Text>}
+<Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Sobrenome"
 
+          />
+        )}
+        name="sobreNome"
+      />
       <Controller
         control={control}
         rules={{
@@ -56,14 +71,28 @@ export default function App() {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            label="senha"
+            label="email"
           />
         )}
-        name="senha"
+        name="email"
       />
-
+ <Controller
+        control={control}
+        rules={{
+         maxLength: 100,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="cpf"
+          />
+        )}
+        name="cpf"
+      />
       <Button type="primary" onPress={handleSubmit(onSubmit)}>
-          Login
+          Pagar com PicPay
       </Button>
     </Container>
     </KeyboardAvoidingView>

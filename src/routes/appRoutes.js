@@ -13,7 +13,7 @@ import  iconMatriculados from '../assets/iconsMenu/cursos-matriculados(1).png'
 import iconNewCurso from '../assets/iconsMenu/matricular-novo-curso_1.png'
 import iconConcluidos from '../assets/iconsMenu/cursos-concluidos.png'
 import iconCertificados from '../assets/iconsMenu/meus-certificados.png'
-
+import FormPayments from '../pages/FormPayments';
 
 
 
@@ -68,7 +68,7 @@ const TabNavigator = () => (
     <TabBottom.Screen name="Cursos Concluidos" component={SlideDois} />
     <TabBottom.Screen name="Certificados" component={Home} />
 
-    <TabBottom.Screen name="Configuracoes" component={Payment} />
+    <TabBottom.Screen name="Configuracoes" component={FormPayments} />
 
 
 

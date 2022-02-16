@@ -17,6 +17,8 @@ export const Text1 = styled.Text`
 
 export const TextDescripition = styled.Text`
   width: 90%;
+  font-family:Montserrat_600SemiBold;
+
 
 `;
 export const TextPicker = styled.Text`
