@@ -9,7 +9,7 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-export default function Debito() {
+export default function Boleto() {
   const [date, setDate] = useState(new Date(1598051730000));
     const [dateFormater, setDateFormater] = useState('20/02/2021');
   const [selectedValue, setSelectedValue] = useState();
@@ -70,40 +70,8 @@ export default function Debito() {
   return (
     <ScrollView >
     <Container>
-        <Title>Debito</Title>
-        <Label>Slecione um Banco</Label>
+        <Title>Boleto</Title>
 
-        {Platform.OS === 'android'?(
-           <DataAndroid>
-           <Picker
-              selectedValue={selectedValue}
-              style={{ height: 50, width: '100%' }}
-              onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-            >
-            <Picker.Item label="Banco Banrisul" value="Banco Banrisul" />
-            <Picker.Item label="Banco Brasil" value="Banco Brasil" />
-            <Picker.Item label="Banco Bradesco" value="Banco Bradescocpay" />
-            <Picker.Item label="Banco Itau" value="Banco Itau" />
-            </Picker>
-        </DataAndroid>
-        ) : (
-            <SelectIos>
-              <Picker
-                onValueChange={(itemValue, itemIndex) => setSelectedValueIos(itemValue)}
-              selectedValue={selectedValueIos}
-            >
-            <Picker.Item label="Banco Banrisul" value="Banco Banrisul" />
-            <Picker.Item label="Banco Brasil" value="Banco Brasil" />
-            <Picker.Item label="Banco Bradesco" value="Banco Bradescocpay" />
-            <Picker.Item label="Banco Itau" value="Banco Itau" />
-            </Picker>
-            </SelectIos>
-        )}
-
-
-
-
-        <View style={{marginTop:200,width:'100%'}}>
 
       <Controller
         control={control}
@@ -169,7 +137,6 @@ export default function Debito() {
         )}
         name="telefone"
         />
-        </View>
 
         <ViewDate>
 
@@ -218,8 +185,8 @@ export default function Debito() {
       )}
         </ViewDate>
 
-      <Button type="primary" style={{marginBottom:250}} onPress={handleSubmit(onSubmit)}>
-          RELIZAR PAGAMENTO
+        <Button type="primary" style={{ marginBottom: 250 }} onPress={handleSubmit(onSubmit)}>
+          gerar boleto
       </Button>
     </Container>
     </ScrollView>
