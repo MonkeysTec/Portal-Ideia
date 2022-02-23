@@ -21,7 +21,11 @@ import FormPayments from '../pages/FormPayments';
 
 import colors from '../utils/colors';
 import Payment from '../pages/Payment';
-
+import Config from '../pages/Config';
+import ResumoConta from '../pages/ResumoConta';
+import Boleto from '../components/Boleto';
+import TermosContrato from '../pages/TermosContrato';
+import Suporte from '../pages/Suporte';
 const TabBottom = createBottomTabNavigator();
 const TabStack = createStackNavigator();
 
@@ -68,7 +72,7 @@ const TabNavigator = () => (
     <TabBottom.Screen name="Cursos Concluidos" component={SlideDois} />
     <TabBottom.Screen name="Certificados" component={Home} />
 
-    <TabBottom.Screen name="Configuracoes" component={FormPayments} />
+    <TabBottom.Screen name="Configuracoes" options={{title:'Configuracoes'}} component={Suporte} />
 
 
 
@@ -78,7 +82,6 @@ const TabNavigator = () => (
 const Tab = () => {
   return (
     <TabStack.Navigator  screenOptions={{
-            title:'',
             headerStyle:{
                 backgroundColor:colors.fontColor
             }

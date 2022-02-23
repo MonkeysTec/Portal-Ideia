@@ -49,3 +49,15 @@ export const ViewEstado = styled.View`
   margin-left:27px;
 
 `;
+export const DataAndroid = styled.TouchableOpacity`
+justify-content: center;
+  background-color: transparent;
+  width: 80%;
+
+  border:2px solid ${colors.buttonBgColor} ;
+  padding-left: 15px;
+  border-radius: 8px;
+  height: 48px;
+
+
+`;

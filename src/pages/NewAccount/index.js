@@ -10,12 +10,19 @@ import {
   ViewCheck,
   TextCheck,
   HalfView,
-  ViewEstado
+  ViewEstado,
+  DataAndroid
 } from './styles';
+import { Label } from '../../components/Inputs/styles';
 
 const NewAccount = () => {
   const [checked, setChecked] = React.useState(false);
   const [selectedValue, setSelectedValue] = useState("java");
+
+  const [estados, setEstados] = useState(
+    ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA',
+      'PB', 'PR', 'PE', 'PI', 'RJ', 'RN','RS','RO','RR','SC','SP','SE','TO']
+  )
   return (
     <ScrollView style={{marginTop:40}}>
 
@@ -29,7 +36,8 @@ const NewAccount = () => {
         <Inputs placeholder="(00)00000-0000" label="Telefone" />
 
         <Title>Endereço</Title>
-        <Text style={{width:'90%',fontFamily:'Montserrat_600SemiBold',textAlign:'left' }}>ATENÇÃO: O endereço abaixo será o
+        <Text style={{ width: '90%', fontFamily: 'Montserrat_600SemiBold', textAlign: 'left' }}>ATENÇÃO: O endereço
+              abaixo será o
               endereço de envio do seu certificado caso
           solicite o ENVIO FÍSICO
         </Text>
@@ -58,12 +66,12 @@ const NewAccount = () => {
               style={{width:'90%',marginTop:-50}}
               onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
               >
-              <Picker.Item label="SP" value="sp" />
-              <Picker.Item label="MG" value="mg" />
-              <Picker.Item label="MG" value="mg" />
-              <Picker.Item label="MG" value="mg" />
-              <Picker.Item label="MG" value="mg" />
-              <Picker.Item label="MG" value="mg" />
+              {
+                estados.map((item => (
+                  <Picker.Item label={item} value={item} />
+
+                )))
+              }
 
             </Picker>
 
@@ -72,23 +80,31 @@ const NewAccount = () => {
 
 
         ) : (
-          <HalfView>
+            <>
+          <View style={{width:'100%',marginBottom:30}}>
+                <Inputs placeholder="Edificio Magno" label="Cidade" />
 
-          <View style={{width:'67%',marginLeft:12}}>
-            <Inputs placeholder="Edificio Magno" label="Cidade" />
-          </View>
+              </View>
+              <View style={{ flex:1 }}>
+                <Text style={{ textAlign:'left',marginLeft:'-40%',color:'#65389E',fontFamily:'Montserrat_600SemiBold'}}>Estado</Text>
+              </View>
 
+          <DataAndroid >
              <Picker
               selectedValue={selectedValue}
-              style={{ height: 50, width: 150 }}
+              style={{ height: 50, width: '100%',paddingTop:-20}}
               onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
               >
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
+                  {estados.map((item => (
+                    <Picker.Item label={item} value={item} />
+
+                  )))}
+
             </Picker>
 
 
-        </HalfView>
+              </DataAndroid>
+              </>
         )}
 
 

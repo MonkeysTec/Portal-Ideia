@@ -11,8 +11,8 @@ export default function App() {
   const { signed, user,signIn } = useContext(AuthContext);
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
-      email: 'alysson_silva@outlook.com',
-      senha: 'timonkeys'
+      email: 'rodrigo1612fm@gmail.com',
+      senha: 'rodri1234'
     }
   });
   const onSubmit = data => onSsubmit(data);
@@ -23,6 +23,7 @@ export default function App() {
       senha_area_aluno:dados.senha
      })
     signIn(data)
+    console.log(data)
    }
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>

@@ -8,16 +8,21 @@ import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginConte
 import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import generatedBoleto from "./PaymentFunctoins";
 
 export default function Boleto() {
+  const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
+
   const [date, setDate] = useState(new Date(1598051730000));
-    const [dateFormater, setDateFormater] = useState('20/02/2021');
+  const [dateFormater, setDateFormater] = useState('20/02/2021');
   const [selectedValue, setSelectedValue] = useState();
   const [selectedValueIos, setSelectedValueIos] = useState();
-
-
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
+  const [moreInfo, setMoreInfo] = useState([]);
+
+
+
 
 
 
@@ -29,7 +34,20 @@ export default function Boleto() {
         mes  = (data.getMonth()+1).toString(), //+1 pois no getMonth Janeiro começa com zero.
         mesF = (mes.length == 1) ? '0'+mes : mes,
       anoF = data.getFullYear();
-    setDateFormater(diaF+"/"+mesF+"/"+anoF)
+    setDateFormater(diaF + "/" + mesF + "/" + anoF);
+
+
+    async function requestUserDados() {
+      const { data } = await axios.post('https://portalidea.com.br/api/dadosPessoais.php', {
+          "idaluno":user.usuario[0].idS_aluno
+      })
+
+      setMoreInfo(data)
+    }
+
+
+
+    requestUserDados()
 
   }, [date]);
 
@@ -51,7 +69,6 @@ export default function Boleto() {
   const showTimepicker = () => {
     showMode('time');
   };
-  const { signed, user,signIn } = useContext(AuthContext);
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       nome: '',
@@ -63,8 +80,9 @@ export default function Boleto() {
 
 
     }
+
   });
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => generatedBoleto(data,moreInfo);
 
 
   return (

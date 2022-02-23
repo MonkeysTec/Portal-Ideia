@@ -10,7 +10,7 @@ import Boleto from '../../components/Boleto';
 
 const FormPayments = () => {
   return (
-    <Debito />
+    <Boleto />
   );
 }
 export default FormPayments;
