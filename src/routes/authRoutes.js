@@ -18,9 +18,9 @@ const AuthRoutes = ()=>{
         color: "#FFF",
       },
       }}>
+            <Auth.Screen name="Cadastro" component={NewAccount} />
 
         <Auth.Screen name="Login" component={Login} />
-            <Auth.Screen name="Cadastro" component={NewAccount} />
 
 
 

@@ -10,6 +10,7 @@ export const Container = styled.TouchableOpacity`
   align-items: center;
   background-color: ${colors.buttonBgColor};
   margin-top: 25px;
+  font-family:Montserrat_600SemiBold;
 
   width: ${(props)=>props.fullsize?'90%':'200px'};
 
@@ -18,12 +19,23 @@ export const Container = styled.TouchableOpacity`
     color:white;
 
   `}
+  ${(props) => props.type === 'transparent' && css`
+    background-color:transparent;
+    color:#5D34A0;
+    border: 3px solid ${colors.fontColor};
+
+
+  `}
 
 
 `;
 export const TextButton = styled.Text`
  ${(props) => props.type === 'primary' && css`
     color:white;
+
+`}
+${(props) => props.type === 'transparent' && css`
+    color:${colors.fontColor};
 
 `}
 

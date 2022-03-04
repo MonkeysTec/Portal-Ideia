@@ -10,7 +10,7 @@ import { Container,Thumbnail,Title,ViewDescription } from './styles';
  import { useNavigation } from '@react-navigation/native';
 
 
-const Cards = ({ title, hours, img, chidren,item }) => {
+const CardsCurso = ({ title, hours, img, chidren,item }) => {
     const navigation = useNavigation();
 
 
@@ -35,9 +35,15 @@ const Cards = ({ title, hours, img, chidren,item }) => {
 
 
 
-      <View style={{width:'90%',alignItems:'center'}}>
+      <View style={{width:'90%',alignItems:'center',}}>
         <Button fullsize type="primary" onPress={()=>navigation.navigate('DetaisCourse',{item})} params={item} >
-          Acessar curso
+          Estudar
+        </Button>
+         <Button fullsize type="primary" onPress={()=>navigation.navigate('DetaisCourse',{item})} params={item} >
+          prova
+        </Button>
+         <Button fullsize type="transparent" onPress={()=>navigation.navigate('DetaisCourse',{item})} params={item} >
+          remover Matricula
         </Button>
       </View>
 
@@ -46,4 +52,4 @@ const Cards = ({ title, hours, img, chidren,item }) => {
   ) ;
 }
 
-export default Cards;
+export default CardsCurso;

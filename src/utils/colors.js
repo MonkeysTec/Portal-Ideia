@@ -7,5 +7,4 @@ module.exports = {
   minBlack: '#4D4D4D',
   greyMax: '#DEDDEE',
   minGrey:'#F9F9FF'
-
 }

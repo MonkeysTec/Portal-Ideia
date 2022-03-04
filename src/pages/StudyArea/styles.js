@@ -10,8 +10,8 @@ export const Container = styled.View`
 export const Thumbnail = styled.Image`
   width: 90%;
   border-radius: 8px;
-  height: 50%;
-  margin-top:50px
+  height: 150px;
+  margin-top:50px;
   `;
 export const TitleCourse = styled.Text`
   font-size:25px ;

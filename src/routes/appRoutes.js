@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image,Text } from 'react-native';
+import { Image,ProgressViewIOSBase,Text } from 'react-native';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -14,7 +14,7 @@ import iconNewCurso from '../assets/iconsMenu/matricular-novo-curso_1.png'
 import iconConcluidos from '../assets/iconsMenu/cursos-concluidos.png'
 import iconCertificados from '../assets/iconsMenu/meus-certificados.png'
 import FormPayments from '../pages/FormPayments';
-
+import StudyArea from '../pages/StudyArea'
 
 
 
@@ -26,6 +26,10 @@ import ResumoConta from '../pages/ResumoConta';
 import Boleto from '../components/Boleto';
 import TermosContrato from '../pages/TermosContrato';
 import Suporte from '../pages/Suporte';
+import Prova from '../pages/Prova';
+import CursosMatriculados from '../pages/CursosMatriculados';
+import NovaSenha from '../pages/NovaSenha ';
+import { RotationGestureHandler } from 'react-native-gesture-handler';
 const TabBottom = createBottomTabNavigator();
 const TabStack = createStackNavigator();
 
@@ -68,11 +72,12 @@ const TabNavigator = () => (
         }}
       >
     <TabBottom.Screen name="Home"  component={Home} />
-    <TabBottom.Screen name="Cursos Matriculados" component={Aprovade} />
+    <TabBottom.Screen name="Cursos Matriculados" component={CursosMatriculados} />
     <TabBottom.Screen name="Cursos Concluidos" component={SlideDois} />
     <TabBottom.Screen name="Certificados" component={Home} />
 
-    <TabBottom.Screen name="Configuracoes" options={{title:'Configuracoes'}} component={Suporte} />
+
+    <TabBottom.Screen name="Configuracoes" options={{title:'Configuracoes'}} component={Config} />
 
 
 
@@ -87,7 +92,14 @@ const Tab = () => {
             }
         }}>
       <TabStack.Screen name="TabStack" options={{ title: '' }} component={TabNavigator} />
-      <TabStack.Screen name="DetaisCourse" options={{title:''}} component={DetaisCourse} />
+      <TabStack.Screen name="DetaisCourse" options={{ title: '' }} component={DetaisCourse} />
+      <TabStack.Screen name="StudyArea" options={{ title: '' }} component={StudyArea} />
+      <TabStack.Screen name="suporte" options={{ title: '' }} component={Suporte} />
+      <TabStack.Screen name="novaSenha" options={{title:''}} component={NovaSenha} />
+      <TabStack.Screen name="termos" options={{title:''}} component={TermosContrato} />
+
+
+
 
     </TabStack.Navigator>
   );

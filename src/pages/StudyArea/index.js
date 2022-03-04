@@ -86,7 +86,7 @@ const StudyArea = ({route}) => {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-        paddingTop: Platform.OS === 'ios' ? 100 : 0
+        paddingTop: Platform.OS === 'ios' ? 10 : 0
   },
 
 });

@@ -12,7 +12,7 @@ const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
 
   useEffect(() => {
 
-    //signOut()
+    signOut()
 
     async function requestCourses() {
       const { data } = await axios.get('https://portalidea.com.br/api/cursos.json')
@@ -34,7 +34,7 @@ const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
 
 
   return (
-    <ScrollView style={{ marginTop: 10 }} >
+    <ScrollView style={{ marginTop: 10, }} >
       <Title>
 Cursos Populares
         </Title>

@@ -3,6 +3,8 @@ import { View ,Picker,Text,ScrollView, Platform} from 'react-native';
 import Button from '../../components/Button';
 import Inputs from '../../components/Inputs';
 import CheckBox from 'react-native-check-box';
+import { useForm, Controller } from "react-hook-form";
+
 import {
   Container,
   Title,
@@ -18,7 +20,24 @@ import { Label } from '../../components/Inputs/styles';
 const NewAccount = () => {
   const [checked, setChecked] = React.useState(false);
   const [selectedValue, setSelectedValue] = useState("java");
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      email: 'rodrigo1612fm@gmail.com',
+      senha: 'rodri1234',
+      nome: '',
+      cpf: '',
+      rg: '',
+      telefone: '',
+      endereco: '',
+      numero: '',
+      cidade: '',
+      complemento: '',
+      cep: '',
+      cidade:''
 
+    }
+  });
+  const onSubmit = data => console.log(data);
   const [estados, setEstados] = useState(
     ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA',
       'PB', 'PR', 'PE', 'PI', 'RJ', 'RN','RS','RO','RR','SC','SP','SE','TO']
@@ -28,12 +47,97 @@ const NewAccount = () => {
 
 
       <Container>
-      <Title>Dados Pessoais</Title>
-        <Inputs placeholder="rodrigo@gmail.com" label="Nome Completo" />
-        <Inputs placeholder="rodrigo@gmail.com"  label="E-mail"/>
-        <Inputs placeholder="999.999.999-99"  label="CPF"/>
-        <Inputs placeholder="99999999" label="RG" />
-        <Inputs placeholder="(00)00000-0000" label="Telefone" />
+        <Title>Dados Pessoais</Title>
+
+
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="E-mail"
+
+          />
+        )}
+        name="email"
+        />
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Nome Completo"
+
+          />
+        )}
+        name="nome"
+        />
+
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Cpf"
+
+          />
+        )}
+        name="cpf"
+        />
+
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Rg"
+            placeholder="00.000000"
+
+          />
+        )}
+        name="rg"
+        />
+
+
+         <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Telefone"
+            placeholder="(00)00000000"
+
+          />
+        )}
+        name="telefone"
+      />
+
+
 
         <Title>Endereço</Title>
         <Text style={{ width: '90%', fontFamily: 'Montserrat_600SemiBold', textAlign: 'left' }}>ATENÇÃO: O endereço
@@ -41,19 +145,90 @@ const NewAccount = () => {
               endereço de envio do seu certificado caso
           solicite o ENVIO FÍSICO
         </Text>
-        <Inputs placeholder="12 das flores" label="RG" />
+
+
+
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Endereco"
+            placeholder="R. das Flores"
+
+          />
+        )}
+        name="endereco"
+        />
+
+
+
         <HalfView>
           <ViewEstado>
             <Inputs placeholder="000" label="N°" />
           </ViewEstado>
           <View style={{width:'67%'}}>
-            <Inputs placeholder="Edificio Magno" label="Cidade" />
+            <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Cidade"
+            placeholder="Espirito Santo"
+
+          />
+        )}
+        name="cidade"
+      />
 
           </View>
 
         </HalfView>
-        <Inputs placeholder="Edificio Magno" label="Complemento" />
-        <Inputs placeholder="999999-99" label="Complemento" />
+
+         <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Complemento"
+            placeholder="Casa"
+
+          />
+        )}
+        name="complemento"
+        />
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Cep"
+            placeholder="9999-99"
+
+          />
+        )}
+        name="cep"
+      />
 
 
         {Platform.OS === 'ios' ? (
@@ -124,7 +299,8 @@ const NewAccount = () => {
               Termos de Contrato.
         </TextCheck>
         </ViewCheck>
-      <Button type="primary">
+      <Button type="primary" onPress={handleSubmit(onSubmit)}>
+
         Atualizar dados
       </Button>
 

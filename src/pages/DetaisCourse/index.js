@@ -39,7 +39,7 @@ const DetaisCourse = ({  route }) => {
 
 
   return (
-    <ScrollView style={{marginTop:10}}>
+    <ScrollView >
       <Container style={styles.safe}>
 
 
@@ -63,7 +63,7 @@ const DetaisCourse = ({  route }) => {
 
 
         <View style={{width:'90%'}}>
-          <Button type="primary" fullsize={true} onPress={()=> navigation.navigate('AreaEstudante',{item})}>
+          <Button type="primary" fullsize={true} onPress={()=> navigation.navigate('StudyArea',{item})}>
               Estudar Agora
           </Button>
         </View>
@@ -89,7 +89,7 @@ const DetaisCourse = ({  route }) => {
 const styles = StyleSheet.create({
   safe: {
     flex: 1,
-        paddingTop: Platform.OS === 'ios' ? 100 : 0
+        paddingTop: Platform.OS === 'ios' ? 10 : 0
   },
 
 });
