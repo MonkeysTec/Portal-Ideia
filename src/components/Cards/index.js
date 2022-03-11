@@ -36,7 +36,7 @@ const Cards = ({ title, hours, img, chidren,item }) => {
 
 
       <View style={{width:'90%',alignItems:'center'}}>
-        <Button fullsize type="primary" onPress={()=>navigation.navigate('DetaisCourse',{item})} params={item} >
+        <Button fullsize type="primary" onPress={()=>navigation.navigate('DetaisCourse',{item,img:'https://portalidea.com.br/'+item.imagem})}  params={item} >
           Acessar curso
         </Button>
       </View>

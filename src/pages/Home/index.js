@@ -12,11 +12,12 @@ const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
 
   useEffect(() => {
 
-    signOut()
+    //signOut()
 
     async function requestCourses() {
-      const { data } = await axios.get('https://portalidea.com.br/api/cursos.json')
-     setCourses(data)
+      const { data } = await axios.get('https://portalidea.com.br/api/cursosJson.php')
+     // console.log(data)
+      setCourses(data)
     }
 
 

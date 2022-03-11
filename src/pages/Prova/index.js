@@ -5,13 +5,13 @@ import Avaliation from './avaliation';
 
 import { Container,Title, Description,Explication} from './styles';
 
-const Prova = () => {
+const Prova = ({route}) => {
   const [avaliation, setAvaliation] = useState(false);
-
+console.log(route.item)
 
   if(avaliation===true)
   {
-    return <Avaliation/>
+    return <Avaliation />
 }
   return (
     <Container>

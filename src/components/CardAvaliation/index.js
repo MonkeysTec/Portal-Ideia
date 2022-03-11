@@ -6,38 +6,52 @@ import { Divider } from '../../pages/DetaisCourse/styles';
 
  import { Container,NumberQuestion,TitleQuestion ,ViewTitle,ViewCheck,TextQuestion} from './styles';
 
-const CardAvaliation = () => {
+const CardAvaliation = ({
+  pergunta,
+  respostaUm,
+  respostaDois,
+  respostaTres,
+  respostaQuatro}) => {
 
-  const [checked,setChecked] = useState()
+  const [checked, setChecked] = useState({
+    question1: false,
+    question2:false,
+    question3:false,
+    question4:false,
+    question5:false,
+
+  })
+
+  console.log(checked)
+
+  const numero = pergunta.split('.')
+  function marcarCheck(e) {
+    console.log(e.testeID)
+}
   return (
 
     <>
       <Container>
       <ViewTitle>
-        <NumberQuestion >1</NumberQuestion>
-        <TitleQuestion>Uma parte crucial da administração financeira inclui</TitleQuestion>
+          <NumberQuestion >{ numero[0]}</NumberQuestion>
+          <TitleQuestion>{ numero[1]}</TitleQuestion>
       </ViewTitle>
         <ViewCheck>
           {Platform.OS === 'ios' ? (
             <View style={{borderColor:colors.greyMax,borderWidth:2,marginLeft:10,borderRadius:8}}>
 
-            <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+            <Checkbox onPress={() =>[...checked,!checked.question1]} status={checked.question1? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
             </View>
 
           ) : (
-              <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
-
+              <Checkbox testID='teste' onPress={(e) => {
+       marcarCheck(e);
+        }} status={checked.question1 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
           )}
 
         <TextQuestion>
 
-        Concepção e assessoria para pessoas,
-        empresas ou governos, criação de
-        softwares;
+       {respostaUm}
         </TextQuestion>
         </ViewCheck>
         <Divider />
@@ -46,22 +60,21 @@ const CardAvaliation = () => {
             <View style={{borderColor:colors.greyMax,borderWidth:2,marginLeft:10,borderRadius:8}}>
 
             <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+        setChecked(!checked.question2);
+        }} status={checked.question2 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
             </View>
 
           ) : (
               <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+        setChecked(!checked.question2);
+        }} status={checked.question2 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
 
           )}
 
         <TextQuestion>
 
-        Concepção e assessoria para pessoas,
-        empresas ou governos, criação de
-        softwares;
+             {respostaDois}
+
         </TextQuestion>
         </ViewCheck>
         <Divider />
@@ -70,22 +83,21 @@ const CardAvaliation = () => {
             <View style={{borderColor:colors.greyMax,borderWidth:2,marginLeft:10,borderRadius:8}}>
 
             <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+        setChecked(!checked.question3);
+        }} status={checked.question3 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
             </View>
 
           ) : (
               <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+        setChecked(!checked.question3);
+        }} status={checked.question3 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
 
           )}
 
         <TextQuestion>
 
-        Concepção e assessoria para pessoas,
-        empresas ou governos, criação de
-        softwares;
+       {respostaTres}
+
         </TextQuestion>
         </ViewCheck>
         <Divider />
@@ -94,22 +106,21 @@ const CardAvaliation = () => {
             <View style={{borderColor:colors.greyMax,borderWidth:2,marginLeft:10,borderRadius:8}}>
 
             <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+        setChecked(!checked.question4);
+        }} status={checked.question4 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
             </View>
 
           ) : (
               <Checkbox onPress={() => {
-        setChecked(!checked);
-        }} status={checked ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+        setChecked(!checked.question4);
+        }} status={checked.question4 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
 
           )}
 
         <TextQuestion>
 
-        Concepção e assessoria para pessoas,
-        empresas ou governos, criação de
-        softwares;
+              {respostaQuatro}
+
         </TextQuestion>
         </ViewCheck>
 

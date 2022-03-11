@@ -96,7 +96,8 @@ const Tab = () => {
       <TabStack.Screen name="StudyArea" options={{ title: '' }} component={StudyArea} />
       <TabStack.Screen name="suporte" options={{ title: '' }} component={Suporte} />
       <TabStack.Screen name="novaSenha" options={{title:''}} component={NovaSenha} />
-      <TabStack.Screen name="termos" options={{title:''}} component={TermosContrato} />
+      <TabStack.Screen name="termos" options={{ title: '' }} component={TermosContrato} />
+      <TabStack.Screen name="prova" options={{title:''}} component={Prova} />
 
 
 

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet,Platform,ScrollView,View,Text} from 'react-native';
+import React, { useEffect, useState,useContext } from 'react';
+import { StyleSheet,Platform,ScrollView,View,Text, Alert} from 'react-native';
 import Button from '../../components/Button';
 import Tumb from '../../assets/testeTumb.jpeg'
 import CourseVideo from '../../components/CourseVideo'
@@ -19,23 +19,63 @@ import Hours from '../../components/Hours';
  import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import teste from '../../assets/teste.webp'
+import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
 
 
 
-const DetaisCourse = ({  route }) => {
+const DetaisCourse = ({ route }) => {
+const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
+const [matriculados,setMatriculados] = useState(false)
   const navigation = useNavigation()
   const { item, img } = route.params;
-  //console.log(item.nomeCurso)
+
+  console.log(item)
+
+
   const [image, setImage] = useState()
+
+
   useEffect(() => {
-  setImage('https://portalidea.com.br/' + item.imagem);
+      async function verificarMatricula(){
+          const { data } = await axios.post('https://portalidea.com.br/api/cursosAndamento.php', {
+            idaluno:user.usuario[0].idS_aluno
+          })
+        //console.log(data.cursosAndamento)
+
+        function verificarCurso(value) {
+
+          if (item.idCurso === value.idCurso) {
+
+            return setMatriculados(true)
+          }
+        }
+
+        const curso = data.cursosAndamento.filter(verificarCurso)
+
+      }
 
 
-
-
+    verificarMatricula()
   }, []);
 
 
+
+  async function matricularCurso() {
+
+    try {
+      const response = await axios.post('https://portalidea.com.br/api/matricularNovoCurso.php', {
+        idaluno: user.usuario[0].idS_aluno,
+        idcurso:item.idCurso
+      })
+
+      navigation.navigate('StudyArea',item)
+
+
+      Alert.alert('Matriculado com sucesso')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   return (
@@ -44,7 +84,7 @@ const DetaisCourse = ({  route }) => {
 
 
      <Thumbnail source={{
-    uri: image,
+    uri: img,
     method: 'POST',
     headers: {
       Pragma: 'no-cache'
@@ -60,13 +100,22 @@ const DetaisCourse = ({  route }) => {
           <Hours hours={item.descricaoCH} />
           <CourseVideo/>
 
-
-
-        <View style={{width:'90%'}}>
+          {
+            matriculados?(<View style={{width:'90%'}}>
           <Button type="primary" fullsize={true} onPress={()=> navigation.navigate('StudyArea',{item})}>
-              Estudar Agora
+             Area de estudo
+
+
           </Button>
-        </View>
+        </View>):(<View style={{width:'90%'}}>
+          <Button type="primary" fullsize={true} onPress={()=> matricularCurso()}>
+                Estudar Agora
+
+          </Button>
+        </View>)
+          }
+
+
         </View>
 
 

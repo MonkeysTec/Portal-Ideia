@@ -23,9 +23,15 @@ const StudyArea = ({route}) => {
  const [image, setImage] = useState()
 
   const { item } = route.params;
-  console.log(item)
   useEffect(() => {
-  setImage('https://portalidea.com.br/' + item.imagem);
+
+    const img = item.imagem.replace('https://portalidea.com.br/', '')
+    console.log('ITEM', img)
+
+    setImage('https://portalidea.com.br/'+img)
+
+
+
 
 
 

@@ -5,10 +5,12 @@ import { View ,ActivityIndicator,ScrollView} from 'react-native';
 import CardsCurso from '../../components/CardsCurso'
 import axios from 'axios';
 import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
-
+import img from '../../assets/teste.webp'
 const CursosMatriculados = () => {
+
    const [courses, setCourses] = useState([])
 const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
+
 
   useEffect(() => {
 
@@ -18,7 +20,7 @@ const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
       const { data } = await axios.post('https://portalidea.com.br/api/cursosAndamento.php', {
         idaluno:user.usuario[0].idS_aluno
       })
-     setCourses(data)
+     setCourses(data.cursosAndamento)
     }
 
 
@@ -41,9 +43,14 @@ const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
   return (
     <ScrollView>
      <Container>
-       {courses.slice(0,20).map(item => (
-        <CardsCurso key={item.nomeCurso} title={item.nomeCurso} img={'https://portalidea.com.br/'+item.imagem}  item={item} hours={item.descricaoCH}/>
-      ))}
+        {courses.map(item => {
+          console.log(item.imagem)
+          return (
+           (
+        <CardsCurso key={item.nomeCurso} title={item.nomeCurso} img={item.imagem}  item={item} hours={item.descricaoCH}/>
+      )
+         )
+       })}
 
 
 
