@@ -11,16 +11,14 @@ const CardAvaliation = ({
   respostaUm,
   respostaDois,
   respostaTres,
-  respostaQuatro}) => {
+  respostaQuatro,numeroQuestao}) => {
 
-  const [checked, setChecked] = useState({
-    question1: false,
-    question2:false,
-    question3:false,
-    question4:false,
-    question5:false,
+  const [checked1, setChecked1] = useState(false)
+  const [checked2, setChecked2] = useState(false)
+  const [checked3, setChecked3] = useState(false)
+  const [checked4, setChecked4] = useState(false)
+  const [checked5, setChecked5] = useState(false)
 
-  })
 
   console.log(checked)
 
@@ -33,7 +31,7 @@ const CardAvaliation = ({
     <>
       <Container>
       <ViewTitle>
-          <NumberQuestion >{ numero[0]}</NumberQuestion>
+          <NumberQuestion >{numeroQuestao}</NumberQuestion>
           <TitleQuestion>{ numero[1]}</TitleQuestion>
       </ViewTitle>
         <ViewCheck>
@@ -45,8 +43,8 @@ const CardAvaliation = ({
 
           ) : (
               <Checkbox testID='teste' onPress={(e) => {
-       marcarCheck(e);
-        }} status={checked.question1 ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
+       setChecked1(!checked1);
+        }} status={checked1  ? 'checked' : 'unchecked'} color={colors.fontColor} style={{ borderRadius: 8 }} />
           )}
 
         <TextQuestion>

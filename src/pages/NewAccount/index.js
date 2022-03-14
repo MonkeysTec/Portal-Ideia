@@ -1,10 +1,11 @@
 import React,{useState} from 'react';
-import { View ,Picker,Text,ScrollView, Platform} from 'react-native';
+import { View ,Picker,Text,ScrollView, Platform, Alert} from 'react-native';
 import Button from '../../components/Button';
 import Inputs from '../../components/Inputs';
 import CheckBox from 'react-native-check-box';
 import { useForm, Controller } from "react-hook-form";
-
+import axios from 'axios';
+import {cpfMask} from '../../utils/mask'
 import {
   Container,
   Title,
@@ -19,7 +20,7 @@ import { Label } from '../../components/Inputs/styles';
 
 const NewAccount = () => {
   const [checked, setChecked] = React.useState(false);
-  const [selectedValue, setSelectedValue] = useState("java");
+  const [selectedValue, setSelectedValue] = useState();
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: 'rodrigo1612fm@gmail.com',
@@ -30,14 +31,64 @@ const NewAccount = () => {
       telefone: '',
       endereco: '',
       numero: '',
-      cidade: '',
+      bairro: '',
       complemento: '',
       cep: '',
       cidade:''
 
     }
   });
-  const onSubmit = data => console.log(data);
+
+
+  async function cadastrar(data) {
+    const responseCadastro = await axios.post('https://portalidea.com.br/api/registrar-alunoJson.php', {
+      email_cadastrar: data.email,
+      nome_cadastrar: data.nome,
+      senha_cadastrar: data.senha,
+      telefone_cadastrar:data.telefone
+    })
+
+    if (responseCadastro.data.erro === false) {
+     const responseAtualizar = await axios.post('https://portalidea.com.br/api/atualizaDadosPessoais.php', {
+      idaluno: data.idS_aluno,
+      cpf: data.cpf,
+      rg: data.rg,
+      tel: data.telefone,
+      endereco: data.endereco,
+      bairro: data.bairro,
+      numero: data.numero,
+      cidade: data.cidade,
+      cep: data.cep,
+      complemento: data.complemento,
+      uf:selectedValue
+     })
+       const respostas = {
+      respostaCadastro: responseCadastro.data,
+      respostaAtualiza:responseAtualizar.data
+
+
+       }
+      console.log(respostas)
+    } else {
+      Alert.alert('Usuário já cadastrado')
+   }
+
+
+
+
+
+
+  }
+
+  function formatCpf(value) {
+    return value
+    .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+    .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+    .replace(/(-\d{2})\d+?$/, '$1')
+  }
+  const onSubmit = data => cadastrar(data);
   const [estados, setEstados] = useState(
     ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA',
       'PB', 'PR', 'PE', 'PI', 'RJ', 'RN','RS','RO','RR','SC','SP','SE','TO']
@@ -66,6 +117,7 @@ const NewAccount = () => {
         )}
         name="email"
         />
+        {errors.email && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
         <Controller
         control={control}
         rules={{
@@ -82,6 +134,7 @@ const NewAccount = () => {
         )}
         name="nome"
         />
+        {errors.nome && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
 
         <Controller
         control={control}
@@ -93,12 +146,35 @@ const NewAccount = () => {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
+            label="Senha"
+
+          />
+        )}
+        name="senha"
+        />
+        {errors.senha && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
+
+        <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        mask="999.999.999-99"
+
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
             label="Cpf"
 
           />
         )}
         name="cpf"
         />
+        {errors.cpf && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
 
         <Controller
         control={control}
@@ -117,6 +193,8 @@ const NewAccount = () => {
         )}
         name="rg"
         />
+        {errors.rg && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
 
 
          <Controller
@@ -135,7 +213,9 @@ const NewAccount = () => {
           />
         )}
         name="telefone"
-      />
+        />
+        {errors.telefone && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
 
 
 
@@ -165,12 +245,48 @@ const NewAccount = () => {
         )}
         name="endereco"
         />
+        {errors.endereco && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
+ <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="Bairro"
+
+          />
+        )}
+        name="bairro"
+        />
+        {errors.bairro && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
 
 
 
         <HalfView>
           <ViewEstado>
-            <Inputs placeholder="000" label="N°" />
+           <Controller
+        control={control}
+        rules={{
+         required: true,
+        }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <Inputs
+            onBlur={onBlur}
+            onChangeText={onChange}
+            value={value}
+            label="N°"
+            placeholder="123"
+
+          />
+        )}
+        name="numero"
+            />
+        {errors.numero && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
           </ViewEstado>
           <View style={{width:'67%'}}>
             <Controller
@@ -189,7 +305,9 @@ const NewAccount = () => {
           />
         )}
         name="cidade"
-      />
+            />
+        {errors.cidade && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
 
           </View>
 
@@ -212,6 +330,8 @@ const NewAccount = () => {
         )}
         name="complemento"
         />
+        {errors.complemento && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
         <Controller
         control={control}
         rules={{
@@ -228,7 +348,9 @@ const NewAccount = () => {
           />
         )}
         name="cep"
-      />
+        />
+        {errors.cep && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
+
 
 
         {Platform.OS === 'ios' ? (
@@ -300,8 +422,7 @@ const NewAccount = () => {
         </TextCheck>
         </ViewCheck>
       <Button type="primary" onPress={handleSubmit(onSubmit)}>
-
-        Atualizar dados
+                    Cadastrar
       </Button>
 
       </Container>

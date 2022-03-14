@@ -30,6 +30,7 @@ import Prova from '../pages/Prova';
 import CursosMatriculados from '../pages/CursosMatriculados';
 import NovaSenha from '../pages/NovaSenha ';
 import { RotationGestureHandler } from 'react-native-gesture-handler';
+import MeusCertificados from '../pages/MeusCertificados';
 const TabBottom = createBottomTabNavigator();
 const TabStack = createStackNavigator();
 
@@ -74,7 +75,7 @@ const TabNavigator = () => (
     <TabBottom.Screen name="Home"  component={Home} />
     <TabBottom.Screen name="Cursos Matriculados" component={CursosMatriculados} />
     <TabBottom.Screen name="Cursos Concluidos" component={SlideDois} />
-    <TabBottom.Screen name="Certificados" component={Home} />
+    <TabBottom.Screen name="Certificados" component={MeusCertificados} />
 
 
     <TabBottom.Screen name="Configuracoes" options={{title:'Configuracoes'}} component={Config} />

@@ -9,7 +9,7 @@ import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginConte
 
 const Avaliation = () => {
 const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
-  const [prova, setProva] = useState([])
+  const [prova, setProva] = useState(false)
 const [numberQuestion,setNumberQuestion] = useState(1)
 
   useEffect(() => {
@@ -38,7 +38,8 @@ try {
     }
 
     getIdCurso()
-  },[])
+  }, [])
+
 
   return (
     <ScrollView>
@@ -50,21 +51,65 @@ try {
       </TitleAvaliation>
 
         {
-          prova.map(item => {
-
-            return(
+          prova && (
+            <>
               <CardAvaliation
-                key={item.pergunta}
-                pergunta={item.pergunta}
-                respostaUm={item.resposta1}
-                respostaDois={item.resposta2}
-                respostaTres={item.resposta3}
-                respostaQuatro={item.resposta4}
+                numeroQuestao="1"
+                key={prova[0].pergunta}
+                pergunta={prova[0].pergunta}
+                respostaUm={prova[0].resposta1}
+                respostaDois={prova[0].resposta2}
+                respostaTres={prova[0].resposta3}
+                respostaQuatro={prova[0].resposta4}
               />
+              <CardAvaliation
+                numeroQuestao="2"
 
-            )
-          })
-        }
+                key={prova[1].pergunta}
+                pergunta={prova[1].pergunta}
+                respostaUm={prova[1].resposta1}
+                respostaDois={prova[1].resposta2}
+                respostaTres={prova[1].resposta3}
+                respostaQuatro={prova[1].resposta4}
+            />
+              <CardAvaliation
+                numeroQuestao="3"
+
+                key={prova[2].pergunta}
+                pergunta={prova[2].pergunta}
+                respostaUm={prova[2].resposta1}
+                respostaDois={prova[2].resposta2}
+                respostaTres={prova[2].resposta3}
+                respostaQuatro={prova[2].resposta4}
+              />
+              <CardAvaliation
+                numeroQuestao="4"
+
+                key={prova[3].pergunta}
+                pergunta={prova[3].pergunta}
+                respostaUm={prova[3].resposta1}
+                respostaDois={prova[3].resposta2}
+                respostaTres={prova[3].resposta3}
+                respostaQuatro={prova[3].resposta4}
+              />
+              <CardAvaliation
+                numeroQuestao="5"
+
+                key={prova[4].pergunta}
+                pergunta={prova[4].pergunta}
+                respostaUm={prova[4].resposta1}
+                respostaDois={prova[4].resposta2}
+                respostaTres={prova[4].resposta3}
+                respostaQuatro={prova[4].resposta4}
+            />
+            </>
+
+
+          )
+}
+
+
+
 
 
       </Container>

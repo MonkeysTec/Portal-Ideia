@@ -3,7 +3,6 @@
 
 import React from 'react';
 import { View } from 'react-native';
-
 import { Container,Input,Label,InputView,ViewNewInput } from './styles';
 
 const Inputs = ({placeholder,secureTextEntry,label,...rest}) => {
@@ -17,7 +16,7 @@ const Inputs = ({placeholder,secureTextEntry,label,...rest}) => {
 
       </InputView>
       <ViewNewInput>
-        <Input  {...rest} placeholder={placeholder} secureTextEntry={secureTextEntry}/>
+        <Input  {...rest}  placeholder={placeholder} secureTextEntry={secureTextEntry}/>
 
       </ViewNewInput>
 

@@ -25,6 +25,7 @@ const AuthRoutes = ()=>{
 
 
 
+
         </Auth.Navigator>
     );
 }

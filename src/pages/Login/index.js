@@ -7,12 +7,17 @@ import { Container,Title } from './styles'
 import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
 import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import colors from "../../utils/colors";
+import { useNavigation } from "@react-navigation/native";
 export default function App() {
+
+  const navigation = useNavigation()
   const { signed, user,signIn } = useContext(AuthContext);
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       email: 'rodrigo1612fm@gmail.com',
-      senha: 'rodri1234'
+      senha: 'meri1234'
     }
   });
   const onSubmit = data => onSsubmit(data);
@@ -22,6 +27,12 @@ export default function App() {
       email_area_aluno:dados.email,
       senha_area_aluno:dados.senha
      })
+
+    if (data.erro === true) {
+      return Alert.alert(data.mensagem)
+    }
+
+    console.log(data)
     signIn(data)
     console.log(data)
    }
@@ -61,7 +72,11 @@ export default function App() {
           />
         )}
         name="senha"
-      />
+        />
+
+        <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')}>
+          <Text style={{color:colors.fontColor,fontFamily:'Montserrat_600SemiBold',fontSize:16}}>Criar conta</Text>
+        </TouchableOpacity>
 
       <Button type="primary" onPress={handleSubmit(onSubmit)}>
           Login
