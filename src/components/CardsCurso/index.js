@@ -51,7 +51,7 @@ const CardsCurso = ({ title, hours, img, chidren,item }) => {
         <Button fullsize type="primary" onPress={()=>navigation.navigate('StudyArea',{item})} params={item} >
           Estudar
         </Button>
-         <Button fullsize type="primary" onPress={()=>prova(item.idCurso,item.nomeCurso)} params={item} >
+         <Button fullsize type="primary" onPress={()=>prova(item.idCurso,item.nomeCurso,)} params={item} >
           prova
         </Button>
          <Button fullsize type="transparent" onPress={()=>navigation.navigate('DetaisCourse',{item})} params={item} >
