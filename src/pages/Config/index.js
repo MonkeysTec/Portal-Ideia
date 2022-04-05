@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { View } from 'react-native';
 import { Divider } from '../DetaisCourse/styles';
 import resumo from '../../assets/iconsConfig/options.png'
@@ -10,10 +10,13 @@ import logout from '../../assets/iconsConfig/log-out-outline(1).png'
 import information from '../../assets/iconsConfig/information-circle.png'
 import { Container,TitleMenu,DivCardsConfig,ImgIcon ,ViewIcon} from './styles';
   import { useNavigation } from '@react-navigation/native';
+  import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
 
 
 const Config = () => {
     const navigation = useNavigation();
+const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
+
 
   return (
     <Container>
@@ -116,7 +119,7 @@ const Config = () => {
         </TitleMenu>
       </ViewIcon>
       <Divider />
-      <ViewIcon onPress={()=>navigation.navigate('resumoconta')}>
+      <ViewIcon onPress={()=>signOut()}>
         <View style={{
           backgroundColor: '#DEDDEE', width: 50, height: 50, justifyContent: 'center',
           alignContent: 'center',

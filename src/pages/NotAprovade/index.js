@@ -13,9 +13,12 @@ import {
 import Button from '../../components/Button';
 import graduateImg from '../../assets/graduated-characters.png'
 import { Divider } from '../DetaisCourse/styles';
+import { useNavigation } from '@react-navigation/native';
 
 
-const NotAprovade = () => {
+const NotAprovade = ({route}) => {
+  const navigation = useNavigation()
+  console.log(route.params);
   return (
     <Container>
       <ImageAproved source={graduateImg}/>
@@ -28,7 +31,7 @@ foi o suficiente
       <YourNote>
         <Text style={{fontSize:20,textAlign:'center'}}>Sua nota é de:</Text>
         <CardNote>
-          <TextPoints>40 pontos</TextPoints>
+          <TextPoints>{route.params.nota} pontos</TextPoints>
 
         </CardNote>
       </YourNote>
@@ -47,7 +50,7 @@ avaliação final.
 
 
         </TextDescription>
-      <Button type="primary" fullsize>
+      <Button type="primary" fullsize onPress={()=>navigation.navigate('prova')}>
         tentar novamente
         </Button>
       </DescriptionsAproved>

@@ -13,9 +13,14 @@ import {
 import Button from '../../components/Button';
 import graduateImg from '../../assets/graduated-characters.png'
 import { Divider } from '../DetaisCourse/styles';
-
+import { useNavigation } from '@react-navigation/native';
+import { WebView } from 'react-native-webview';
 
 const Aprovade = () => {
+  const route = useNavigation()
+
+  console.log(route)
+
   return (
     <Container>
       <ImageAproved source={graduateImg}/>
@@ -26,7 +31,7 @@ const Aprovade = () => {
       <YourNote>
         <Text style={{fontSize:20,textAlign:'center'}}>Sua nota é de:</Text>
         <CardNote>
-          <TextPoints>100 pontos</TextPoints>
+          <TextPoints>{route.setParams.nota}pontos</TextPoints>
 
         </CardNote>
       </YourNote>

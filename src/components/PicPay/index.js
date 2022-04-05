@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState ,useEffect} from "react";
 import { Text, View, TextInput, Alert,KeyboardAvoidingView,Platform } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Button from "../../components/Button";
@@ -7,10 +7,16 @@ import { Container,Title } from './styles'
 import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
 import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
+import { payment } from "./Payment";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
 
-export default function PicPay() {
+export default function PicPay({route}) {
+  const navigation = useNavigation()
   const { signed, user,signIn } = useContext(AuthContext);
+  const [cpf,setCpf]= useState()
+
+  const tipo = (route.params)
   const { control, handleSubmit, formState: { errors } } = useForm({
     defaultValues: {
       nome: '',
@@ -21,7 +27,34 @@ export default function PicPay() {
 
     }
   });
-  const onSubmit = data => console.log(data);
+  const onSubmit = async data => {
+    const retorno = await payment(data,user,tipo,cpf)
+    if(retorno===true){
+      Alert.alert('Seu certificado foi gerado com sucesso')
+      navigation.navigate('cursosmatriculados')
+    }
+
+
+
+  };
+
+  useEffect(() => {
+
+
+    async function requestUserDados() {
+      const { data } = await axios.post('https://portalidea.com.br/api/dadosPessoais.php', {
+          "idaluno":user.usuario[0].idS_aluno
+      })
+
+      if(data)
+      setCpf(data.DadosAluno[0].cpf)
+
+
+    }
+    requestUserDados()
+
+  }, []);
+
 
 
   return (

@@ -56,7 +56,7 @@ export default function App() {
         )}
         name="email"
       />
-      {errors.email && <Text>This is required.</Text>}
+      {errors.email && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
 
       <Controller
         control={control}
@@ -73,6 +73,7 @@ export default function App() {
         )}
         name="senha"
         />
+        {errors.senha && <Text style={{color:'red'}}>Campo Obrigatorio</Text>}
 
         <TouchableOpacity onPress={()=>navigation.navigate('Cadastro')}>
           <Text style={{color:colors.fontColor,fontFamily:'Montserrat_600SemiBold',fontSize:16}}>Criar conta</Text>

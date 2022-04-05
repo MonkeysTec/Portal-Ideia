@@ -8,7 +8,13 @@ const AuthContext = createContext({ signed: false, user: {} });
 export const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState();
+    const [remove, setRemove] = useState(false);
+
     const [loading, setLoading] = useState(true);
+
+    function removeMatricular(){
+      setRemove(!remove)
+    }
 
 
     //VERIFICA SE A USUARIOS NO LOCAL STORAGE
@@ -64,7 +70,7 @@ if(loading){
 }
 // APOS O CARREGAMENTO ELE RETORNA O CONTEXT PROVIDER COM OS DADOS DO USUARIO
     return (
-        <AuthContext.Provider value={{ signed: !! user, user, signIn, signOut, loading }} >
+        <AuthContext.Provider value={{ signed: !! user, user, signIn, signOut, loading,removeMatricular,remove }} >
             {children}
         </AuthContext.Provider>
     )

@@ -69,3 +69,9 @@ height: 10px;
 
 
 `;
+
+export const ImprimirBoleto = styled.TouchableOpacity`
+
+
+
+`;

@@ -3,7 +3,10 @@ import { View,Picker,Text,Platform  } from 'react-native';
 
  import { Container,Text1,TextDescripition,TextPicker,ViewPicker } from './styles';
 import Button from '../../components/Button';
-const Payment = () => {
+import { useNavigation } from '@react-navigation/native';
+const Payment = ({route}) => {
+  const tipoCer = route.params;
+  const navigation =  useNavigation()
   const [selectedValue, setSelectedValue] = useState();
   function renderComponent() {
     switch (selectedValue) {
@@ -12,21 +15,33 @@ const Payment = () => {
         break;
       case 'pix':
         console.log('pix')
+        navigation.navigate('pix')
+
         break;
       case 'picpay':
         console.log('picpay')
+        navigation.navigate('picpay',tipoCer)
+
         break;
       case 'deposito':
         console.log('deposito')
+        navigation.navigate('deposito')
+
         break;
       case 'paypal':
         console.log('paypal')
+        navigation.navigate('paypal')
+
         break;
       case 'debito':
         console.log('debito')
+        navigation.navigate('debito')
+
         break;
        case 'boleto':
         console.log('boleto')
+        navigation.navigate('boleto')
+
       break;
     }
 

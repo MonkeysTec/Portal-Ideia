@@ -6,6 +6,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../pages/Home'
 import DetaisCourse from '../pages/DetaisCourse'
 import Aprovade from '../pages/Aprovade'
+import NotAprovade from '../pages/NotAprovade'
+
 import SlideDois from '../pages/SlideDois'
 import Welcome from '../pages/Welcome'
 import iconConfig from '../assets/iconsMenu/configuracoes.png'
@@ -33,6 +35,13 @@ import NovaSenha from '../pages/NovaSenha ';
 import { RotationGestureHandler } from 'react-native-gesture-handler';
 import MeusCertificados from '../pages/MeusCertificados';
 import CursosConcluidos from '../pages/CursosConcluidos';
+import Avaliation from '../pages/Avaliation';
+import SolicitarCertificado from '../pages/SolicitarCertificado';
+import Pix from '../components/Pix';
+import PicPay from '../components/PicPay';
+import Deposito from '../components/Deposito';
+import Debito from '../components/Debito';
+
 const TabBottom = createBottomTabNavigator();
 const TabStack = createStackNavigator();
 
@@ -94,13 +103,38 @@ const Tab = () => {
                 backgroundColor:colors.fontColor
             }
         }}>
-      <TabStack.Screen name="TabStack" options={{ title: '' }} component={TabNavigator} />
+
+        <TabStack.Screen name="TabStack" options={{ title: '' }} component={TabNavigator} />
       <TabStack.Screen name="DetaisCourse" options={{ title: '' }} component={DetaisCourse} />
       <TabStack.Screen name="StudyArea" options={{ title: '' }} component={StudyArea} />
       <TabStack.Screen name="suporte" options={{ title: '' }} component={Suporte} />
       <TabStack.Screen name="novaSenha" options={{title:''}} component={NovaSenha} />
       <TabStack.Screen name="termos" options={{ title: '' }} component={TermosContrato} />
       <TabStack.Screen name="prova" options={{title:''}} component={Prova} />
+      <TabStack.Screen name="aprovado" options={{title:''}} component={Aprovade} />
+      <TabStack.Screen name="naoaprovado" options={{title:''}} component={NotAprovade} />
+      <TabStack.Screen name="resumoconta" options={{title:''}} component={ResumoConta} />
+      <TabStack.Screen name="avaliation" options={{title:''}} component={Avaliation} />
+      <TabStack.Screen name="cursosmatriculados" options={{title:''}} component={CursosMatriculados} />
+      <TabStack.Screen name="solicitarCertificado" options={{title:''}} component={SolicitarCertificado} />
+      <TabStack.Screen name="pagamento" options={{title:''}} component={Payment} />
+      <TabStack.Screen name="pix" options={{title:''}} component={Pix} />
+      <TabStack.Screen name="picpay" options={{title:''}} component={PicPay} />
+      <TabStack.Screen name="deposito" options={{title:''}} component={Deposito} />
+      <TabStack.Screen name="debito" options={{title:''}} component={Debito} />
+      <TabStack.Screen name="boleto" options={{title:''}} component={Boleto} />
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

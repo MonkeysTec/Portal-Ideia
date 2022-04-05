@@ -1,9 +1,9 @@
 import React, { useContext,useState,useEffect } from "react";
-import { Text, View, TextInput, Alert,KeyboardAvoidingView,Platform ,Picker,ScrollView} from "react-native";
+import { Text, View, TextInput, Alert,KeyboardAvoidingView,Platform ,Picker,ScrollView,ActivityIndicator,Linking} from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import Button from "../../components/Button";
 import Inputs from '../../components/Inputs'
-import { Container,Title,ViewDate,Label ,DataAndroid,SelectIos} from './styles'
+import { Container,Title,ViewDate,Label ,DataAndroid,SelectIos,ImprimirBoleto,} from './styles'
 import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginContext';
 import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
@@ -11,7 +11,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import generatedBoleto from "./PaymentFunctoins";
 
 export default function Boleto() {
-  const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
+  const { signed,signOut, user, signIn } = useContext(AuthContext);
 
   const [date, setDate] = useState(new Date(1598051730000));
   const [dateFormater, setDateFormater] = useState('20/02/2021');
@@ -20,6 +20,11 @@ export default function Boleto() {
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
   const [moreInfo, setMoreInfo] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [boleto, setBoleto] = useState(false);
+
+
+
 
 
 
@@ -82,7 +87,17 @@ export default function Boleto() {
     }
 
   });
-  const onSubmit = data => generatedBoleto(data,moreInfo);
+  const onSubmit = async  data => {
+
+    setLoading(true)
+    const infoBoleto = await generatedBoleto(data,moreInfo)
+
+    setBoleto(infoBoleto)
+console.log("BOLETO INFO------------------------------------------------",boleto.links[0].href)
+
+    setLoading(false)
+  };
+
 
 
   return (
@@ -203,9 +218,15 @@ export default function Boleto() {
       )}
         </ViewDate>
 
-        <Button type="primary" style={{ marginBottom: 250 }} onPress={handleSubmit(onSubmit)}>
-          gerar boleto
-      </Button>
+
+<Button type={'primary'} fullsize={true} style={{marginBottom:30}} onPress={handleSubmit(onSubmit)}>gerar boleto</Button>
+
+
+
+{!loading&&boleto&&<ImprimirBoleto onPress={()=>Linking.openURL(boleto.links[0].href)}>
+<Text>Acessar boleto</Text>
+</ImprimirBoleto>}
+
     </Container>
     </ScrollView>
   );

@@ -1,14 +1,13 @@
 import styled from 'styled-components/native';
 import colors from '../../utils/colors';
 
-export const Container = styled.View`
-justify-content: center;
-align-items: center;
+export const Container = styled.ScrollView`
+margin-left: 10%;
 `;
 export const Card = styled.View`
   border: 2px solid ${colors.greyMax};
   margin-top: 20px;
- min-height: 450px;
+ min-height: 470px;
  width: 90%;
  height: auto;
  border-radius: 8px;

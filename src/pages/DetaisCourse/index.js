@@ -1,7 +1,9 @@
 import React, { useEffect, useState,useContext } from 'react';
-import { StyleSheet,Platform,ScrollView,View,Text, Alert} from 'react-native';
+import { StyleSheet,Platform,ScrollView,View,Text, Alert,ActivityIndicator} from 'react-native';
 import Button from '../../components/Button';
 import Tumb from '../../assets/testeTumb.jpeg'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import CourseVideo from '../../components/CourseVideo'
 import {
   Container,
@@ -28,14 +30,37 @@ const { signed,signOut, user, signIn, loading } = useContext(AuthContext);
 const [matriculados,setMatriculados] = useState(false)
   const navigation = useNavigation()
   const { item, img } = route.params;
-
-  console.log(item)
+const [cursoUnico,setCursoUnico] = useState()
+  console.log(item.idCurso)
 
 
   const [image, setImage] = useState()
 
 
   useEffect(() => {
+
+    async function PegarCursoUnico(){
+
+      const { data } = await axios.get('https://portalidea.com.br/api/cursosJson.php')
+
+
+      function compararIdCurso(value) {
+        console.log('valueee curso',value)
+
+        if (item.idCurso === value.idCurso) {
+
+          return setCursoUnico(value)
+        }
+      }
+
+      const curso = data.filter(compararIdCurso)
+      console.log('cursooo',curso)
+
+
+
+
+    }
+    PegarCursoUnico()
       async function verificarMatricula(){
           const { data } = await axios.post('https://portalidea.com.br/api/cursosAndamento.php', {
             idaluno:user.usuario[0].idS_aluno
@@ -45,7 +70,7 @@ const [matriculados,setMatriculados] = useState(false)
         function verificarCurso(value) {
 
           if (item.idCurso === value.idCurso) {
-
+            console.log(item)
             return setMatriculados(true)
           }
         }
@@ -62,13 +87,14 @@ const [matriculados,setMatriculados] = useState(false)
 
   async function matricularCurso() {
 
+    const dados = {
+      idaluno: user.usuario[0].idS_aluno,
+      idcurso:cursoUnico.idCurso
+    }
     try {
-      const response = await axios.post('https://portalidea.com.br/api/matricularNovoCurso.php', {
-        idaluno: user.usuario[0].idS_aluno,
-        idcurso:item.idCurso
-      })
-
-      navigation.navigate('StudyArea',item)
+      const response = await axios.post('https://portalidea.com.br/api/matricularNovoCurso.php',dados)
+       console.log(response.data)
+      //navigation.navigate('StudyArea',{item:cursoUnico})
 
 
       Alert.alert('Matriculado com sucesso')
@@ -76,9 +102,14 @@ const [matriculados,setMatriculados] = useState(false)
       console.log(error)
     }
   }
-
+  if (!cursoUnico) {
+    return <View style={{ justifyContent: 'center', alignContent: 'center', alignItems:'center',flex:1}}>
+      <ActivityIndicator style={{width:150,height:150}} />
+    </View>
+  }
 
   return (
+
     <ScrollView >
       <Container style={styles.safe}>
 
@@ -94,14 +125,14 @@ const [matriculados,setMatriculados] = useState(false)
 
         <View style={{width:'100%',marginLeft:'10%'}}>
           <TitleCourse>
-          {item.nomeCurso}
+          {cursoUnico.nomeCurso}
           </TitleCourse>
 
-          <Hours hours={item.descricaoCH} />
+          <Hours hours={cursoUnico.descricaoCH } />
           <CourseVideo/>
 
           {
-            matriculados?(<View style={{width:'90%'}}>
+            matriculados==true?(<View style={{width:'90%'}}>
           <Button type="primary" fullsize={true} onPress={()=> navigation.navigate('StudyArea',{item})}>
              Area de estudo
 
@@ -126,7 +157,7 @@ const [matriculados,setMatriculados] = useState(false)
           <TitlesTopics>
             Descrição
           </TitlesTopics>{ `\n`}
-        {item.descricao}
+        { cursoUnico.descricao}
         </Description>
       <Divider />
     </Container>

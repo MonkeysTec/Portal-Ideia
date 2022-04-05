@@ -8,20 +8,19 @@ import AuthContext, { AuthProvider } from '../../Context/AuthProvider/LoginConte
 import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
-
 export default function Debito() {
   const [date, setDate] = useState(new Date(1598051730000));
     const [dateFormater, setDateFormater] = useState('20/02/2021');
   const [selectedValue, setSelectedValue] = useState();
   const [selectedValueIos, setSelectedValueIos] = useState();
 
-
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-
+const [dadosDebito] = useState()
 
 
   useEffect(() => {
+
 
     var data = date,
         dia  = data.getDate().toString(),
@@ -30,7 +29,7 @@ export default function Debito() {
         mesF = (mes.length == 1) ? '0'+mes : mes,
       anoF = data.getFullYear();
     setDateFormater(diaF+"/"+mesF+"/"+anoF)
-
+   //gerarHash()
   }, [date]);
 
   const onChange = (event, selectedDate) => {
@@ -64,7 +63,12 @@ export default function Debito() {
 
     }
   });
-  const onSubmit = data => console.log(data);
+
+
+
+
+
+  const onSubmit = data => gerarHash();
 
 
   return (
