@@ -1,5 +1,5 @@
 import axios from 'axios'
-async function  generatedBoleto(dados,address){
+async function  generatedBoleto(dados,address,tipo){
 
   console.log(dados)
   console.log(address.DadosAluno[0])
@@ -10,7 +10,7 @@ try {
     "reference_id": "ex-00001",
     "description": "Motivo da cobrança",
     "amount": {
-      "value": 1000,
+      "value": tipo==='digital'?3990:5990,
       "currency": "BRL"
     },
     "payment_method": {
@@ -48,8 +48,8 @@ try {
   }})
 
 
-  console.log('BOLETOOOOOO',res.data)
-  return res.data
+  console.log('BOLETOOOOOO',res.data.links[0].href)
+  return res.data.links[0].href
 
 
 

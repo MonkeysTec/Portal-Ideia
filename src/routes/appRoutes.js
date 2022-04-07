@@ -86,7 +86,7 @@ const TabNavigator = () => (
     <TabBottom.Screen name="Home"  component={Home} />
     <TabBottom.Screen name="Cursos Matriculados" component={CursosMatriculados} />
     <TabBottom.Screen name="Cursos Concluidos" component={CursosConcluidos} />
-    <TabBottom.Screen name="Certificados" component={Pdf} />
+    <TabBottom.Screen name="Certificados" component={MeusCertificados} />
 
 
     <TabBottom.Screen name="Configuracoes" options={{title:'Configuracoes'}} component={Config} />
@@ -123,6 +123,7 @@ const Tab = () => {
       <TabStack.Screen name="deposito" options={{title:''}} component={Deposito} />
       <TabStack.Screen name="debito" options={{title:''}} component={Debito} />
       <TabStack.Screen name="boleto" options={{title:''}} component={Boleto} />
+
 
 
 

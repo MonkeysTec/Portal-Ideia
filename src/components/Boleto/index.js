@@ -1,5 +1,6 @@
 import React, { useContext,useState,useEffect } from "react";
-import { Text, View, TextInput, Alert,KeyboardAvoidingView,Platform ,Picker,ScrollView,ActivityIndicator,Linking} from "react-native";
+import { Text, View, TextInput, Alert,KeyboardAvoidingView,Platform ,Picker,ScrollView,ActivityIndicator,} from "react-native";
+import * as Linking from 'expo-linking';
 import { useForm, Controller } from "react-hook-form";
 import Button from "../../components/Button";
 import Inputs from '../../components/Inputs'
@@ -9,10 +10,14 @@ import AppIntroSlider from "react-native-app-intro-slider";
 import axios from "axios";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import generatedBoleto from "./PaymentFunctoins";
+import * as WebBrowser from 'expo-web-browser';
+import { WebView } from 'react-native-webview';
+import { useNavigation } from "@react-navigation/native";
+import * as Clipboard from 'expo-clipboard';
 
-export default function Boleto() {
+export default function Boleto({route}) {
   const { signed,signOut, user, signIn } = useContext(AuthContext);
-
+console.log(route.params)
   const [date, setDate] = useState(new Date(1598051730000));
   const [dateFormater, setDateFormater] = useState('20/02/2021');
   const [selectedValue, setSelectedValue] = useState();
@@ -22,7 +27,7 @@ export default function Boleto() {
   const [moreInfo, setMoreInfo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [boleto, setBoleto] = useState(false);
-
+const navigation = useNavigation()
 
 
 
@@ -90,14 +95,17 @@ export default function Boleto() {
   const onSubmit = async  data => {
 
     setLoading(true)
-    const infoBoleto = await generatedBoleto(data,moreInfo)
+    const infoBoleto = await generatedBoleto(data,moreInfo,route.params)
 
     setBoleto(infoBoleto)
-console.log("BOLETO INFO------------------------------------------------",boleto.links[0].href)
+console.log(infoBoleto)
 
     setLoading(false)
   };
-
+  async function Clip(){
+    await Clipboard.setString(boleto);
+    alert("Link do boleto Copiado!");
+  }
 
 
   return (
@@ -223,9 +231,11 @@ console.log("BOLETO INFO------------------------------------------------",boleto
 
 
 
-{!loading&&boleto&&<ImprimirBoleto onPress={()=>Linking.openURL(boleto.links[0].href)}>
+{!loading&&boleto&&<ImprimirBoleto onPress={()=>Clip()}>
 <Text>Acessar boleto</Text>
 </ImprimirBoleto>}
+
+
 
     </Container>
     </ScrollView>

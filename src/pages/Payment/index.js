@@ -40,7 +40,7 @@ const Payment = ({route}) => {
         break;
        case 'boleto':
         console.log('boleto')
-        navigation.navigate('boleto')
+        navigation.navigate('boleto',tipoCer)
 
       break;
     }
